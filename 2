@@ -1,0 +1,61 @@
+/*
+2. Escreva um programa que contenha duas variáveis inteiras.
+   Compare seus endereços e exiba o maior endereço.
+
+
+
+   %p - formato para imprimir um ponteiro (endereço de memória)
+
+   (void*)ptr_a - o endereço apontado por ptr_a é tratado como um ponteiro genérico (void*)
+
+   (uintptr_t)ptr_a - o endereço apontado por ptr_a é tratado como inteiro sem sinal
+
+   uintptr_t é um tipo inteiro sem sinal
+   Grande o suficiente para guardar um endereço de memória inteiro
+   Funciona em 32 e 64 bits
+
+
+*/
+
+#include <stdio.h>
+#include <stdint.h>
+
+// -----------------------------------------------------------------------------
+// Função que recebe variáveis inteiras (valores)
+// Apenas encaminha seus endereços para a função de comparação
+// -----------------------------------------------------------------------------
+void processaVariaveis(int a, int b)
+{
+    // Chama a função que trabalha diretamente com ponteiros
+    comparaEnderecos(&a, &b); // passa os endereços para a função comparaEndereços comparar
+}
+
+// -----------------------------------------------------------------------------
+// Função que compara endereços (trabalha com ponteiros)
+// -----------------------------------------------------------------------------
+void comparaEnderecos(int *ptr_a, int *ptr_b)
+{
+    printf("Endereco de a: %p\n", (void*)ptr_a);
+    printf("Endereco de b: %p\n", (void*)ptr_b);
+
+    uintptr_t endereco_a = (uintptr_t)ptr_a;
+    uintptr_t endereco_b = (uintptr_t)ptr_b;
+
+    if (endereco_a > endereco_b)
+        printf("O maior endereco eh o de a: %p\n", (void*)ptr_a);
+    else
+        printf("O maior endereco eh o de b: %p\n", (void*)ptr_b);
+}
+
+// -----------------------------------------------------------------------------
+// Função principal
+// -----------------------------------------------------------------------------
+int main()
+{
+    int a = 10;
+    int b = 20;
+
+    processaVariaveis(a, b); // Passa valores, não endereços
+
+    return 0;
+}

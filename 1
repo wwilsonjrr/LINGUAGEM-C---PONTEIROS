@@ -3,55 +3,82 @@
    Associe as variáveis aos ponteiros (use &).
    Modifique os valores de cada variável usando os ponteiros.
    Imprima os valores das variáveis antes e após a modificação.
+
+
+    🧩 Frase correta para você usar (e até escrever em prova)
+
+     &inteiro representa o endereço da variável inteiro, que é passado para a função para que ela possa modificar seu valor por meio de um ponteiro.
+
+Nota:
+
+| Código    | Significado      |
+| --------- | ---------------- |
+| int *p;   | Declara ponteiro |
+| p = &x;   | Guarda endereço  |
+| *p        | Acessa valor     |
+| &x        | Endereço de x    |
+
+
+int x = 10;
+int *p = &x;
+
+
+x → vale 10
+
+p → vale 1000 (endereço)
+
+*p → vale 10
+
 */
 
-#include <stdio.h>
+#include <stdio.h>   // Biblioteca padrão de entrada e saída (printf)
 #include <stdlib.h>
 
 // -----------------------------------------------------------------------------
-// Função que imprime os valores das variáveis
+// Protótipo das funções
 // -----------------------------------------------------------------------------
-void imprimeValores(int inteiro, float real, char caractere)
-{
-    printf("Inteiro: %d\n", inteiro);
-    printf("Real: %.2f\n", real);
-    printf("Caractere: %c\n", caractere);
-}
+void imprimeValores(int inteiro, float real, char caractere);
+void modificaValores(int *ptr_inteiro, float *ptr_real, char *ptr_char);
 
-// -----------------------------------------------------------------------------
-// Função que modifica os valores das variáveis usando ponteiros
-// -----------------------------------------------------------------------------
-void modificaValores(int *ptr_int, float *ptr_float, char *ptr_char)
-{
-    *ptr_int = 20;
-    *ptr_float = 10.75;
-    *ptr_char = 'Z';
-}
 
 // -----------------------------------------------------------------------------
 // Função principal
 // -----------------------------------------------------------------------------
 int main()
 {
-    // ----------- VARIÁVEIS REAIS (argumentos) -----------
-    int numero = 10;          // variável inteira
-    float valor = 5.5;        // variável real
-    char letra = 'A';         // variável caractere
+    int INTEIRO = 10;          // Declara e inicializa um inteiro
+    float REAL = 5.5;          // Declara e inicializa um real (float)
+    char CARACTERE = 'A';      // Declara e inicializa um caractere
 
-    // ----------- PONTEIROS (forma didática) -----------
-    int *pNumero = &numero;     // ponteiro aponta para 'numero'
-    float *pValor = &valor;     // ponteiro aponta para 'valor'
-    char *pLetra = &letra;      // ponteiro aponta para 'letra'
+    printf("Valores originais:\n"); // Cabeçalho
+    imprimeValores(INTEIRO, REAL, CARACTERE); // Chamada da função de impressão
 
-    printf("Valores originais:\n");
-    imprimeValores(numero, valor, letra);
+    // Modifica os valores usando ponteiros
+    modificaValores(&INTEIRO, &REAL, &CARACTERE); // Passa os endereços para a função modificar as variáveis
 
-    // Passa os ponteiros para a função
-    modificaValores(pNumero, pValor, pLetra);
-
-    printf("\nValores apos modificacao via ponteiros:\n");
-    imprimeValores(numero, valor, letra);
+    printf("\nValores apos modificacao via ponteiros:\n"); // Cabeçalho
+    imprimeValores(INTEIRO, REAL, CARACTERE); // Exibe os valores atualizados
 
     system("pause");
-    return 0;
+    return 0; // Indica término correto do programa
+}
+
+// -----------------------------------------------------------------------------
+// Função que imprime os valores das variáveis
+// -----------------------------------------------------------------------------
+void imprimeValores(int inteiro, float real, char caractere)
+{
+    printf("Inteiro: %d\n", inteiro);        // Exibe o valor do inteiro
+    printf("Real: %.2f\n", real);            // Exibe o valor do real com duas casas decimais
+    printf("Caractere: %c\n", caractere);    // Exibe o valor do caractere
+}
+
+// -----------------------------------------------------------------------------
+// Função que modifica os valores das variáveis usando ponteiros
+// -----------------------------------------------------------------------------
+void modificaValores(int *ptr_inteiro, float *ptr_real, char *ptr_char)
+{
+    *ptr_inteiro = 20;    // Modifica o valor do inteiro via ponteiro
+    *ptr_real = 10.75;    // Modifica o valor do real via ponteiro
+    *ptr_char = 'Z';      // Modifica o valor do caractere via ponteiro
 }

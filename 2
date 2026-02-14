@@ -2,54 +2,69 @@
 2. Escreva um programa que contenha duas variáveis inteiras.
    Compare seus endereços e exiba o maior endereço.
 
-   %p              -> formato para imprimir um ponteiro (endereço de memória)
-   (void*)ptr      -> trata o endereço como ponteiro genérico
-   (uintptr_t)ptr  -> trata o endereço como inteiro sem sinal
+   int* -> endereço que aponta para um int
 
-   uintptr_t:
-   - tipo inteiro sem sinal
-   - grande o suficiente para guardar um endereço de memória
-   - funciona em arquiteturas 32 e 64 bits
+   &A -> pega o endereço de A
+
+   ptrA -> já contém o endereço
+
+   *ptrA -> acessa o valor que esta no endereço de ptrA
+
+   int *maior = maiorEndereco(ptrA, ptrB);; -> acessa o valor que está guardado naquele endereço
+                                            -> se maior == &A, então *maior == A
+                                            -> se maior == &B, então *maior == B
+
+   printf("\nMaior endereco: %p\n", (void*)maior); -> maior é do tipo int*, mas quando usa %p, ele espera void*
+
 */
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdint.h>
 
 // -----------------------------------------------------------------------------
-// Função que compara endereços (trabalha diretamente com ponteiros)
+// Protótipos das funções
 // -----------------------------------------------------------------------------
-void comparaEnderecos(int *ptr_x, int *ptr_y)
-{
-    printf("Endereco de x: %p\n", (void*)ptr_x); // imprime o endereço da variável o qual o ponteiro aponta
-    printf("Endereco de y: %p\n", (void*)ptr_y); // imprime o endereço da variável o qual o ponteiro aponta
-
-    uintptr_t endereco_x = (uintptr_t)ptr_x;     // endereco_x recebe o endereço da variável para a qual ptr_x aponta, tratado como um inteiro sem sinal.
-    uintptr_t endereco_y = (uintptr_t)ptr_y;     // endereco_y recebe o endereço da variável para a qual ptr_y aponta, tratado como um inteiro sem sinal.
-
-    if (endereco_x > endereco_y)
-        printf("O maior endereco eh o de x: %p\n", (void*)ptr_x);
-    else
-        printf("O maior endereco eh o de y: %p\n", (void*)ptr_y);
-}
+void imprimeEnderecos(int *ptrA, int *ptrB);
+int* maiorEndereco(int *ptrA, int *ptrB);
 
 // -----------------------------------------------------------------------------
 // Função principal
 // -----------------------------------------------------------------------------
-int main()
+int main(void)
 {
-    // ----------- VARIÁVEIS REAIS (argumentos) -----------
-    int numeroA = 10;
-    int numeroB = 20;
+    int A = 10;
+    int B = 20;
 
-    // ----------- PONTEIROS (forma didática) -----------
-    int *pNumeroA = &numeroA;   // ponteiro aponta para numeroA
-    int *pNumeroB = &numeroB;   // ponteiro aponta para numeroB
+    int *ptrA = &A;  // ponteiro recebe endereço de A
+    int *ptrB = &B;  // ponteiro recebe endereço de B
 
-    // Passa os ponteiros (endereços reais das variáveis)
-    comparaEnderecos(pNumeroA, pNumeroB);
+    imprimeEnderecos(ptrA, ptrB);
+
+    // Recebe o ponteiro para o maior endereço
+    int *maior = maiorEndereco(ptrA, ptrB);
+
+    printf("\nMaior endereco: %p\n", (void*)maior);
 
     system("pause");
     return 0;
 }
 
+// -----------------------------------------------------------------------------
+// Função que imprime os endereços das variáveis
+// -----------------------------------------------------------------------------
+void imprimeEnderecos(int *ptrA, int *ptrB)
+{
+    printf("Endereco de A: %p\n", (void*)ptrA);
+    printf("Endereco de B: %p\n", (void*)ptrB);
+}
+
+// -----------------------------------------------------------------------------
+// Função que retorna o ponteiro com maior endereço
+// -----------------------------------------------------------------------------
+int* maiorEndereco(int *ptrA, int *ptrB)
+{
+    if (ptrA > ptrB)
+        return ptrA;
+    else
+        return ptrB;
+}

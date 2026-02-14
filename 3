@@ -1,0 +1,84 @@
+/*
+3. Escreva um programa que contenha duas variáveis inteiras.
+   Leia essas variáveis do teclado.
+   Em seguida, compare seus endereços e exiba o conteúdo do maior endereço.
+*/
+
+#include <stdio.h>      // Biblioteca padrão para entrada e saída (printf, scanf)
+#include <stdlib.h>
+
+
+// -----------------------------------------------------------------------------
+// Protótipo das funções
+// -----------------------------------------------------------------------------
+void leInteiro(const char *mensagem, int *ptr_valor); // a função leInteiro não vai (e não deve) modificar os caracteres dessa mensagem
+void imprimeEnderecos(int *ptr_a, int *ptr_b);
+void mostraConteudoMaiorEndereco(int *ptr_a, int *ptr_b);
+
+// -----------------------------------------------------------------------------
+// Função principal (forma didática)
+// -----------------------------------------------------------------------------
+int main()
+{
+    int valorA, valorB;        // Declara duas variáveis inteiras
+
+    // Ponteiros (forma didática): cada ponteiro aponta para sua variável
+    int *pValorA = &valorA;    // pValorA guarda o endereço de valorA
+    int *pValorB = &valorB;    // pValorB guarda o endereço de valorB
+
+    // Lê os valores do teclado usando ponteiros
+    leInteiro("Digite o valor da variavel a: ", pValorA);
+    leInteiro("Digite o valor da variavel b: ", pValorB);
+
+    // Mostra os endereços (didático)
+    imprimeEnderecos(pValorA, pValorB);
+
+    // Compara os endereços e mostra o conteúdo do maior endereço
+    mostraConteudoMaiorEndereco(pValorA, pValorB);
+
+    system("pause");
+    return 0;                  // Encerra o programa
+}
+
+// -----------------------------------------------------------------------------
+// Função que lê um inteiro do teclado (usando ponteiro)
+// -----------------------------------------------------------------------------
+void leInteiro(const char *mensagem, int *ptr_valor)
+{
+    printf("%s", mensagem);             // Isso exibe: Digite o valor da variavel a:
+    scanf("%d", ptr_valor);             // Lê e armazena diretamente no endereço da variável
+}
+
+// -----------------------------------------------------------------------------
+// Função que exibe os endereços das variáveis (usando ponteiros)
+// -----------------------------------------------------------------------------
+void imprimeEnderecos(int *ptr_a, int *ptr_b)
+{
+    printf("\nEndereco de a: %p\n", (void*)ptr_a);   // Imprime o endereço apontado por ptr_a
+    printf("Endereco de b: %p\n", (void*)ptr_b);     // Imprime o endereço apontado por ptr_b
+}
+
+// -----------------------------------------------------------------------------
+// Função que compara os endereços e exibe o conteúdo do maior endereço
+// -----------------------------------------------------------------------------
+void mostraConteudoMaiorEndereco(int *ptr_a, int *ptr_b)
+{
+    int *maior;  // Ponteiro que irá armazenar o maior endereço
+
+    // Compara diretamente os ponteiros (endereços)
+    if (ptr_a > ptr_b)
+    {
+        printf("\nO maior endereco eh o de a.\n");
+        maior = ptr_a;
+    }
+    else
+    {
+        printf("\nO maior endereco eh o de b.\n");
+        maior = ptr_b;
+    }
+
+    // Exibe o endereço e o conteúdo
+    printf("Maior endereco: %p\n", (void*)maior);
+    printf("Conteudo do maior endereco: %d\n", *maior);
+}
+

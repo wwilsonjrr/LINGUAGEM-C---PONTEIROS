@@ -1,0 +1,52 @@
+/*
+4. Faça um programa que leia 2 valores inteiros e chame uma função que receba estas
+   2 variáveis e troque o seu conteúdo, ou seja, esta função é chamada passando
+   duas variáveis A e B, por exemplo, e após a execução da função,
+   A conterá o valor de B e B terá o valor de A.
+*/
+
+#include <stdio.h>  // Biblioteca padrão para entrada e saída (printf, scanf)
+#include <stdlib.h>
+
+
+// Protótipo da função
+void troca(int *x, int *y);
+
+// Função principal (main)
+int main()
+{
+    int a, b;   // Declara duas variáveis inteiras
+
+    // Solicita ao usuário os valores
+    printf("Digite o valor de A: ");
+    scanf("%d", &a);  // Lê o valor e armazena em 'a'
+
+    printf("Digite o valor de B: ");
+    scanf("%d", &b);  // Lê o valor e armazena em 'b'
+
+    // Mostra os valores originais
+    printf("\nAntes da troca:\n");
+    printf("A = %d\n", a);
+    printf("B = %d\n", b);
+
+    // troca os valores armazenados nesses endereços
+    troca(&a, &b);  
+
+    // Mostra os valores após a troca
+    printf("\nDepois da troca:\n");
+    printf("A = %d\n", a);
+    printf("B = %d\n", b);
+
+    system("pause");
+    return 0;   // Finaliza o programa
+}
+
+// Declaração da função troca, que recebe dois ponteiros para inteiros
+void troca(int *x, int *y)
+{
+    int temp;   // Variável temporária para armazenar um dos valores
+
+    temp = *x;  // Guarda o valor apontado por x (conteúdo de A) em temp
+    *x = *y;    // Atribui o valor de B (conteúdo de y) a A
+    *y = temp;  // Coloca o valor original de A (em temp) dentro de B
+}

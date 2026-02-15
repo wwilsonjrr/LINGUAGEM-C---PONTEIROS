@@ -1,0 +1,75 @@
+/*
+5. Faça um programa que leia dois valores inteiros e chame uma função que receba
+   estes 2 valores de entrada e retorne o maior valor na primeira variável e o menor
+   valor na segunda variável. Escreva o conteúdo das 2 variáveis na tela.
+
+   Ou seja:
+
+   Ler dois valores inteiros
+
+   Chamar uma função
+
+   Essa função deve:
+
+   Receber os dois valores
+
+   Garantir que:
+
+   A primeira variável fique com o maior valor
+
+   A segunda variável fique com o menor valor
+
+   Você troca os valores entre as variáveis.
+
+   Depois imprimir os dois valores
+*/
+
+#include <stdio.h>  // Biblioteca padrão para entrada e saída (printf, scanf)
+#include <stdlib.h>
+
+// Protótipo da função
+void ordena(int *x, int *y);
+
+// Função principal (main)
+int main()
+{
+    int a, b;  // Declara duas variáveis inteiras
+
+    // Solicita que o usuário digite dois valores inteiros
+    printf("Digite o primeiro valor: ");
+    scanf("%d", &a);
+
+    printf("Digite o segundo valor: ");
+    scanf("%d", &b);
+
+    // Exibe os valores originais antes da função
+    printf("\nValores antes da funcao:\n");
+    printf("A = %d\n", a);
+    printf("B = %d\n", b);
+
+    // Chama a função ordena passando os endereços de a e b
+    ordena(&a, &b);
+
+    // Exibe os valores após a chamada da função
+    printf("\nValores apos a funcao:\n");
+    printf("A (maior) = %d\n", a);
+    printf("B (menor) = %d\n", b);
+
+    system("pause");
+    return 0;  // Encerra o programa com sucesso
+}
+
+// Declaração da função que recebe dois ponteiros para inteiros
+void ordena(int *x, int *y)
+{
+    int temp;  // Variável temporária usada para trocar valores, se necessário
+
+    // Se o valor apontado por x for menor que o apontado por y, troca
+    if(*x < *y)
+    {
+        temp = *x;  // Guarda o valor de x em temp
+        *x = *y;    // x recebe o valor de y (agora x tem o maior)
+        *y = temp;  // y recebe o valor de temp (menor valor)
+    }
+    // Caso contrário, não faz nada, pois x já é o maior
+}

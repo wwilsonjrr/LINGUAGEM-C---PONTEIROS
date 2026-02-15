@@ -1,0 +1,61 @@
+/*
+10. Crie um programa que contenha um array de inteiros contendo 5 elementos.
+    Utilizando apenas aritmética de ponteiros, leia esse array do teclado e
+    imprima o dobro de cada valor lido.
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+// -----------------------------------------------------------------------------
+// Protótipos das funções
+// -----------------------------------------------------------------------------
+void leArray(int *ptr_vetor, int tamanho);
+void imprimeDobro(int *ptr_vetor, int tamanho);
+
+// -----------------------------------------------------------------------------
+// Função principal
+// -----------------------------------------------------------------------------
+int main()
+{
+    int vetor[5];  // Array de 5 inteiros
+
+    // Chama função para leitura
+    leArray(vetor, 5);
+
+    // Chama função para imprimir o dobro
+    imprimeDobro(vetor, 5);
+
+    system("pause");
+    return 0;
+}
+
+// -----------------------------------------------------------------------------
+// Função que lê os valores usando aritmética de ponteiros
+// -----------------------------------------------------------------------------
+void leArray(int *ptr_vetor, int tamanho)
+{
+    printf("Digite 5 numeros inteiros:\n");
+
+    for (int i = 0; i < tamanho; i++)
+    {
+        // *(ptr_vetor + i) acessa a posição i
+        scanf("%d", (ptr_vetor + i));
+    }
+}
+
+// -----------------------------------------------------------------------------
+// Função que imprime o dobro de cada valor usando ponteiros
+// -----------------------------------------------------------------------------
+void imprimeDobro(int *ptr_vetor, int tamanho)
+{
+    printf("\nDobro dos valores digitados:\n");
+
+    for (int i = 0; i < tamanho; i++)
+    {
+        // *(ptr_vetor + i) acessa o valor da posição i
+        printf("Posicao %d -> %d\n",
+               i,
+               2 * (*(ptr_vetor + i)));
+    }
+}

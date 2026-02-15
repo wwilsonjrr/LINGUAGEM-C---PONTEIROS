@@ -1,0 +1,48 @@
+/*
+8. Crie um programa que contenha um array de float contendo 10 elementos.
+   Imprima o endereço de cada posição desse array.
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+// -----------------------------------------------------------------------------
+// Protótipo da função
+// -----------------------------------------------------------------------------
+void imprimeEnderecos(float *ptr_vetor, int tamanho);
+
+// -----------------------------------------------------------------------------
+// Função principal
+// -----------------------------------------------------------------------------
+int main()
+{
+    float vetor[10];   // Declara array com 10 elementos
+
+    // Inicializa o vetor (opcional, só para organizar memória)
+    for (int i = 0; i < 10; i++)
+    {
+        vetor[i] = i * 1.0;  // Quando você faz i * 1.0, o resultado vira número real
+    }
+
+    // Chama a função passando o endereço do primeiro elemento
+    imprimeEnderecos(vetor, 10);
+
+    system("pause");
+    return 0;
+}
+
+// -----------------------------------------------------------------------------
+// Função que imprime o endereço de cada posição do array
+// -----------------------------------------------------------------------------
+void imprimeEnderecos(float *ptr_vetor, int tamanho)
+{
+    printf("Enderecos das posicoes do array:\n\n");
+
+    for (int i = 0; i < tamanho; i++)
+    {
+        printf("Posicao %d -> Endereco: %p\n", i, (void*)(ptr_vetor + i)); // ptr_vetor + i
+                                                                           // Avance i posições no array, Não é soma simples de número.
+                                                                           // É aritmética de ponteiros.
+    }
+}
+

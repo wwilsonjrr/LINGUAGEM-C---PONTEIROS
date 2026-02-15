@@ -1,0 +1,73 @@
+/*
+9. Crie um programa que contenha uma matriz de float contendo 3 linhas e 3 colunas.
+   Imprima o endereço de cada posição dessa matriz.
+
+
+| Parte          | O que representa            |
+| -------------- | --------------------------- |
+| i              | número da linha             |
+| j              | número da coluna            |
+| matriz[i][j]   | conteúdo daquela célula     |
+| i + j          | valor que será colocado ali |
+
+
+| Expressão           | Tipo   | O que representa |
+| ------------------- | ------ | ---------------- |
+| ptr_matriz[i][j]    | float  | valor            |
+| &ptr_matriz[i][j]   | float* | endereço         |
+
+
+&ptr_matriz[i][j] -->  Avançando posições a partir da variável ponteiro --> Ex. 9
+
+ptr_vetor + i --> avançando posições a partir da variável array --> Ex. 8
+
+
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+// -----------------------------------------------------------------------------
+// Protótipo da função
+// -----------------------------------------------------------------------------
+void imprimeEnderecos(float (*ptr_matriz)[3], int linhas, int colunas);  // float (*ptr_matriz)[3] é um ponteiro para uma linha da matriz
+
+// -----------------------------------------------------------------------------
+// Função principal
+// -----------------------------------------------------------------------------
+int main()
+{
+    float matriz[3][3];
+
+    // Inicializa a matriz (apenas para organização)
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            matriz[i][j] = i + j;
+        }
+    }
+
+    // Chama a função passando a matriz
+    imprimeEnderecos(matriz, 3, 3);
+
+    system("pause");
+    return 0;
+}
+
+// -----------------------------------------------------------------------------
+// Função que imprime os endereços da matriz
+// -----------------------------------------------------------------------------
+void imprimeEnderecos(float (*ptr_matriz)[3], int linhas, int colunas)
+{
+    printf("Enderecos das posicoes da matriz:\n\n");
+
+    for (int i = 0; i < linhas; i++)
+    {
+        for (int j = 0; j < colunas; j++)
+        {
+            printf("Posicao [%d][%d] -> Endereco: %p\n",
+                   i, j, (void*)&ptr_matriz[i][j]);
+        }
+    }
+}

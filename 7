@@ -1,0 +1,45 @@
+/*
+7. Crie um programa que contenha uma função que permita passar por parâmetro
+   dois números inteiros A e B.
+   A função deverá calcular a soma entre estes dois números e armazenar o resultado na variável A.
+   Esta função não deverá possuir retorno, mas deverá modificar o valor do primeiro parâmetro.
+   Imprima os valores de A e B na função principal.
+*/
+
+#include <stdio.h>  // Inclui a biblioteca padrão de entrada e saída (para printf e scanf)
+#include <stdlib.h>
+
+// Protótipo da função
+void somaSemRetorno(int *x, int y);
+
+// Função principal (main)
+int main()
+{
+    int a, b;  // Declara duas variáveis inteiras A e B
+
+    printf("Digite o valor de A: ");  // Solicita ao usuário o valor da variável A
+    scanf("%d", &a);                  // Lê o valor digitado e armazena na variável A
+
+    printf("Digite o valor de B: ");  // Solicita ao usuário o valor da variável B
+    scanf("%d", &b);                  // Lê o valor digitado e armazena na variável B
+
+    printf("\nValores antes da funcao:\n");  // Exibe mensagem antes da execução da função
+    printf("A = %d\n", a);                   // Mostra o valor atual de A
+    printf("B = %d\n", b);                   // Mostra o valor atual de B
+
+    somaSemRetorno(&a, b);  // Chama a função passando o endereço de A (para ser modificado) e o valor de B (apenas usado no cálculo)
+
+    printf("\nValores apos a funcao:\n");    // Exibe mensagem após a execução da função
+    printf("A (soma de A + B) = %d\n", a);   // Exibe o novo valor de A (já modificado pela função)
+    printf("B (inalterado) = %d\n", b);      // Exibe o valor de B (não foi alterado pela função)
+
+    system("pause");
+    return 0;  // Retorna 0 para indicar que o programa terminou com sucesso
+}
+
+// Declaração da função que NÃO possui retorno (void)
+// Ela recebe dois parâmetros: um ponteiro para A (para poder alterar seu valor) e um valor normal B
+void somaSemRetorno(int *x, int y)
+{
+    *x = *x + y;  // Soma o valor de A (*x) com o valor de B (y) e armazena o resultado em A (modifica diretamente o valor original de A)
+}

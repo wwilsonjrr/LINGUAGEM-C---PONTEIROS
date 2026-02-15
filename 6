@@ -1,0 +1,47 @@
+/*
+6. Elaborar um programa que leia dois valores inteiros (A e B).
+   Em seguida, faça uma função que retorne a soma do dobro dos dois números lidos.
+   A função deverá armazenar o dobro de A na própria variável A
+   e o dobro de B na própria variável B.
+*/
+
+#include <stdio.h>  // Inclui a biblioteca padrão de entrada e saída (para usar printf e scanf)
+#include <stdlib.h>
+
+
+// Protótipo da função
+int somaDobro(int *x, int *y);
+
+// Função principal (main)
+int main()
+{
+    int a, b, resultado;  // Declara três variáveis inteiras: A, B e resultado
+
+    printf("Digite o valor de A: ");  // Solicita ao usuário o valor da variável A
+    scanf("%d", &a);                  // Lê o valor digitado e armazena na variável A
+
+    printf("Digite o valor de B: ");  // Solicita ao usuário o valor da variável B
+    scanf("%d", &b);                  // Lê o valor digitado e armazena na variável B
+
+    printf("\nValores antes da funcao:\n");  // Exibe um cabeçalho informando que os valores são os originais
+    printf("A = %d\n", a);                   // Exibe o valor de A antes da função ser chamada
+    printf("B = %d\n", b);                   // Exibe o valor de B antes da função ser chamada
+
+    resultado = somaDobro(&a, &b);  // Chama a função somaDobro passando os endereços de A e B, e guarda o retorno em resultado
+
+    printf("\nValores apos a funcao:\n");  // Exibe um cabeçalho informando que agora os valores foram modificados pela função
+    printf("A (dobro) = %d\n", a);         // Exibe o novo valor de A (já dobrado)
+    printf("B (dobro) = %d\n", b);         // Exibe o novo valor de B (já dobrado)
+    printf("Soma dos dobros = %d\n", resultado);  // Exibe o valor retornado pela função, que é a soma dos dois valores dobrados
+
+    system("pause");
+    return 0;  // Retorna 0 para indicar que o programa terminou com sucesso
+}
+
+// Declaração da função somaDobro que recebe dois ponteiros para inteiros
+int somaDobro(int *x, int *y)
+{
+    *x = *x * 2;    // Dobra o valor armazenado no endereço apontado por x (ou seja, o valor de A)
+    *y = *y * 2;    // Dobra o valor armazenado no endereço apontado por y (ou seja, o valor de B)
+    return *x + *y; // Retorna a soma dos valores já dobrados de A e B
+}

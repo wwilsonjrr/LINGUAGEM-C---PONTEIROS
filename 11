@@ -1,0 +1,65 @@
+/*
+11. Crie um programa que contenha um array contendo 5 elementos inteiros.
+    Leia esse array do teclado e imprima o endereço das posições contendo valores pares.
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+// ------------------------------------------------------------------
+// Protótipos das funções
+// ------------------------------------------------------------------
+void lerArray(int *ptr_array, int tamanho);
+void imprimirEnderecosPares(int *ptr_array, int tamanho);
+
+// ------------------------------------------------------------------
+// Função principal
+// ------------------------------------------------------------------
+int main()
+{
+    int vetor[5];  // Array com 5 elementos inteiros
+
+    // Chama função para ler os valores
+    lerArray(vetor, 5);
+
+    // Chama função para imprimir os endereços dos valores pares
+    imprimirEnderecosPares(vetor, 5);
+
+    system("pause");
+    return 0;
+}
+
+// ------------------------------------------------------------------
+// Função que lê os valores do teclado
+// ------------------------------------------------------------------
+void lerArray(int *ptr_array, int tamanho)
+{
+    printf("Digite %d numeros inteiros:\n\n", tamanho);
+
+    for (int i = 0; i < tamanho; i++)
+    {
+        printf("Posicao %d: ", i);
+        scanf("%d", (ptr_array + i));  // ptr_array + i (avançando posições a partir da variável array)
+        // Não usamos & porque (ptr_array + i) já é endereço
+    }
+}
+
+// ------------------------------------------------------------------
+// Função que imprime os endereços das posições com valores pares
+// ------------------------------------------------------------------
+void imprimirEnderecosPares(int *ptr_array, int tamanho)
+{
+    printf("\nEnderecos das posicoes com valores pares:\n\n");
+
+    for (int i = 0; i < tamanho; i++)
+    {
+        if ( *(ptr_array + i) % 2 == 0 )   // verifica se o valor é par
+        {
+            printf("Valor %d -> Endereco: %p\n",
+                   *(ptr_array + i),
+                   (void*)(ptr_array + i));
+            // %p exige conversão para (void*)
+        }
+    }
+}
+

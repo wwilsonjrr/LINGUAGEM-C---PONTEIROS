@@ -1,0 +1,93 @@
+/*
+22. Crie uma função para somar dois arrays.
+    Esta função deve receber dois arrays e retornar a soma em um terceiro array.
+    Caso o tamanho do primeiro e segundo array seja diferente, então a função retornará ZERO (0).
+    Caso a função seja concluída com sucesso, a mesma deve retornar UM (1).
+    Utilize aritmética de ponteiros para manipulação do array.
+
+
+
+    Use sizeof para descobrir tamanho:
+
+    Apenas quando o array está declarado naquele escopo.
+
+
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+// ------------------------------------------------------------
+// Protótipo da função
+// ------------------------------------------------------------
+int somaArrays(int *vet1, int N1,
+               int *vet2, int N2,
+               int *vetResultado);
+
+// ------------------------------------------------------------
+// Função principal
+// ------------------------------------------------------------
+int main()
+{
+    int A[] = {1, 2, 3, 4, 5};
+    int B[] = {10, 20, 30, 40, 50};
+    int tamanhoA = sizeof(A) / sizeof(A[0]);
+    int tamanhoB = sizeof(B) / sizeof(B[0]);
+
+    int resultado[5]; // resultado é um array
+
+    int status;
+
+    // Chamada da função
+    status = somaArrays(A, tamanhoA, B, tamanhoB, resultado);
+
+    if (status == 1)
+    {
+        printf("Soma realizada com sucesso:\n");
+
+        // Imprime resultado usando ponteiro
+        int *ptr = resultado;         // O ponteiro ptr guarda o endereço de resultado[0]
+        int *limite = ptr + tamanhoA; // O ponteiro limite guarda esse novo endereço
+                                      // ptr + tamanhoA: novo endereço (avança tamanhoA posições)
+                                      // ptr → é o endereço do primeiro elemento
+                                      // *ptr → é o valor que está dentro do primeiro elemento
+
+        while (ptr < limite)
+        {
+            printf("%d ", *ptr); // imprime os valores
+            ptr++;               // avança as posições
+        }
+        printf("\n"); // pula uma linha após as impressões
+    }
+    else
+    {
+        printf("Erro: tamanhos diferentes!\n");
+    }
+
+    system("pause");
+    return 0;
+}
+
+// ------------------------------------------------------------
+// Função que soma dois arrays usando ponteiros
+// ------------------------------------------------------------
+int somaArrays(int *vet1, int N1,
+               int *vet2, int N2,
+               int *vetResultado)
+{
+    if (N1 != N2) // Se tamanhos forem diferentes → retorna 0
+        return 0; // sai do programa
+
+    int *limite = vet1 + N1; // O ponteiro limite guarda esse novo endereço
+
+    while (vet1 < limite)
+    {
+        *vetResultado = *vet1 + *vet2;
+
+        vet1++; // avança as posições
+        vet2++; // avança as posições
+        vetResultado++; // avança as posições
+    }
+
+    return 1;
+}

@@ -1,0 +1,62 @@
+/*
+18. Implemente uma função que calcule a área da superfície e o volume de uma esfera de raio R.
+    Essa função deve obedecer ao protótipo:
+
+    void calc_esfera(float R, float *area, float *volume)
+
+    A área da superfície e o volume são dados, respectivamente, por:
+    A = 4 * π * R²       <--- Área da superfície externa da esfera
+    V = (4/3) * π * R³   <--- Volume interno da esfera
+
+
+    area → endereço
+
+    4 * PI * pow(R,2) → valor calculado
+
+    *area = valor → coloca o valor naquele endereço
+
+    *area = 4 * PI * pow(R, 2) → coloca o valor calculado naquele endereço; ou
+                               → coloca o valor calculado no endereço apontado pelo ponteiro area
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>   // Para usar pow()
+
+#define PI 3.141592653589793
+
+// ------------------------------------------------------------
+// Protótipo da função
+// ------------------------------------------------------------
+void calc_esfera(float R, float *area, float *volume);
+
+// ------------------------------------------------------------
+// Função principal
+// ------------------------------------------------------------
+int main()
+{
+    float raio;
+    float area, volume;
+
+    printf("Digite o valor do raio da esfera: ");
+    scanf("%f", &raio);
+
+    // Chama a função passando os ENDEREÇOS
+    calc_esfera(raio, &area, &volume);
+
+    printf("\nResultados:\n");
+    printf("Area da superficie: %.4f\n", area);
+    printf("Volume da esfera: %.4f\n", volume);
+
+    system("pause");
+    return 0;
+}
+
+// ------------------------------------------------------------
+// Função que calcula área e volume da esfera
+// ------------------------------------------------------------
+void calc_esfera(float R, float *area, float *volume)
+{
+    *area = 4 * PI * pow(R, 2);                  // coloca o valor calculado naquele endereço
+    *volume = (4.0 / 3.0) * PI * pow(R, 3);      // coloca o valor calculado naquele endereço
+}

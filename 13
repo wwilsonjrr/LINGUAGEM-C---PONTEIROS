@@ -1,0 +1,99 @@
+/*
+13. Elabore uma função que receba duas strings como parâmetros e verifique
+    se a segunda string ocorre dentro da primeira.
+    Use aritmética de ponteiros para acessar os caracteres das strings.
+*/
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+// ------------------------------------------------------------
+// PROTÓTIPOS
+// ------------------------------------------------------------
+void lerString(char *str, int tamanho);
+int verificaSubstring(char *str1, char *str2);
+
+// ------------------------------------------------------------
+// FUNÇÃO PRINCIPAL
+// ------------------------------------------------------------
+int main()
+{
+    char s1[200];
+    char s2[200];
+    int resultado;
+
+    printf("Digite a primeira string: ");
+    lerString(s1, 200);
+
+    printf("Digite a segunda string: ");
+    lerString(s2, 200);
+
+    resultado = verificaSubstring(s1, s2);
+
+    if (resultado == 1)
+        printf("\nA segunda string ocorre dentro da primeira.\n");
+    else
+        printf("\nA segunda string NAO ocorre dentro da primeira.\n");
+
+    system("pause");
+    return 0;
+}
+
+// ------------------------------------------------------------
+// FUNÇÃO QUE LÊ STRING (com espaços)
+// ------------------------------------------------------------
+void lerString(char *str, int tamanho)
+{
+    fgets(str, tamanho, stdin);
+
+    str[strcspn(str, "\n")] = '\0';
+}
+
+
+// ------------------------------------------------------------
+// FUNÇÃO QUE VERIFICA SE str2 ESTÁ DENTRO DE str1
+// ------------------------------------------------------------
+int verificaSubstring(char *str1, char *str2)
+{
+    char *p1;  // Ponteiro auxiliar para percorrer str1 durante a comparação
+    char *p2;  // Ponteiro auxiliar para percorrer str2 durante a comparação
+
+    // Caso especial: se a segunda string for vazia,
+    // consideramos que ela "ocorre" dentro de qualquer string
+    if (*str2 == '\0')
+        return 1;  // Retorna 1 indicando que encontrou
+
+    // Percorre toda a primeira string até encontrar o caractere nulo '\0'
+    while (*str1 != '\0')
+    {
+        p1 = str1;  // p1 começa na posição atual de str1
+        p2 = str2;  // p2 começa no início da segunda string
+
+        // Compara caractere por caractere enquanto:
+        // 1) os caracteres forem iguais
+        // 2) ainda não chegamos ao final de str2
+        while (*p1 == *p2 && *p2 != '\0')
+        {
+            p1++;  // Avança para o próximo caractere em str1
+            p2++;  // Avança para o próximo caractere em str2
+        }
+
+        // Se chegamos ao final de str2 ('\0'),
+        // significa que todos os caracteres coincidiram
+        if (*p2 == '\0')
+            return 1;  // Substring encontrada
+
+        // Caso contrário, avança uma posição na string principal
+        // e tenta novamente a comparação a partir da próxima posição
+        str1++;
+    }
+
+    // Se percorreu toda str1 e não encontrou correspondência
+    return 0;  // Substring não encontrada
+}
+
+
+

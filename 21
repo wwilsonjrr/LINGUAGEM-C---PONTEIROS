@@ -1,0 +1,71 @@
+/*
+21. Escreva um programa que declare um array de inteiros e um ponteiro para inteiros.
+    Associe o ponteiro ao array. Agora, some mais um (+1) a cada posição do array usando o ponteiro (use *).
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+// ------------------------------------------------------------
+// Protótipos das funções
+// ------------------------------------------------------------
+void incrementarArray(int *ptr, int tamanho);
+void imprimirArray(int *ptr, int tamanho);
+
+// ------------------------------------------------------------
+// Função principal
+// ------------------------------------------------------------
+int main()
+{
+    int vetor[] = {10, 20, 30, 40, 50};
+    int tamanho = sizeof(vetor) / sizeof(vetor[0]); // Total de bytes do vetor, ou seja, 5 x 4 = 20 bytes
+                                                    // divididos por total de bytes de um único elemento do vetor, ou seja 4 bytes
+                                                    // 20 / 4 = 5 bytes
+
+    int *ptr;
+
+    // Associa o ponteiro ao array
+    ptr = vetor; // endereço do ponteiro ptr = endereço do array
+                 // &ptr pega o endereço e ptr já contém um endereço
+
+    printf("Array original:\n");
+    imprimirArray(ptr, tamanho);
+
+    // Incrementa cada posição
+    incrementarArray(ptr, tamanho);
+
+    printf("\nArray apos incrementar +1:\n");
+    imprimirArray(ptr, tamanho);
+
+    system("pause");
+    return 0;
+}
+
+// ------------------------------------------------------------
+// Função que soma +1 a cada posição usando ponteiro
+// ------------------------------------------------------------
+void incrementarArray(int *ptr, int tamanho)
+{
+    int *limite = ptr + tamanho;
+
+    while (ptr < limite)
+    {
+        (*ptr)++;   // Incrementa o valor apontado
+        ptr++;      // Avança para próxima posição
+    }
+}
+
+// ------------------------------------------------------------
+// Função que imprime o array usando ponteiro
+// ------------------------------------------------------------
+void imprimirArray(int *ptr, int tamanho)
+{
+    int *limite = ptr + tamanho;
+
+    while (ptr < limite)
+    {
+        printf("%d ", *ptr);
+        ptr++; // Avança para próxima posição
+    }
+    printf("\n");
+}

@@ -1,0 +1,70 @@
+/*
+16. Considere a seguinte declaração:
+    int A, *B, **C, ***D;
+    Escreva um programa que leia a variável A e calcule e exiba o dobro, o triplo e o quádruplo desse valor
+    utilizando apenas os ponteiros B, C e D.
+    O ponteiro B deve ser usado para calcular o dobro, C o triplo e D o quádruplo.
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+// ------------------------------------------------------------
+// Protótipos das funções
+// ------------------------------------------------------------
+void calcularDobro(int *B);
+void calcularTriplo(int **C);
+void calcularQuadruplo(int ***D);
+
+// ------------------------------------------------------------
+// Função principal
+// ------------------------------------------------------------
+int main()
+{
+    int A;
+    int *B;
+    int **C;
+    int ***D;
+
+    // Lê o valor de A
+    printf("Digite um valor inteiro: ");
+    scanf("%d", &A);
+
+    // Faz os ponteiros apontarem corretamente
+    B = &A;   // Guarda endereço de A  // B é uma variável, cujo tipo é ponteiro (int*), guarda endereços de int
+    C = &B;   // Guarda endereço de B  // C é uma variável, cujo tipo é ponteiro (int*), guarda endereços de int
+    D = &C;   // Guarda endereço de C  // D é uma variável, cujo tipo é ponteiro (int*), guarda endereços de int
+
+    // Chamada das funções
+    calcularDobro(B);
+    calcularTriplo(C);
+    calcularQuadruplo(D);
+
+    system("pause");
+    return 0;
+}
+
+// ------------------------------------------------------------
+// Função que calcula o dobro usando ponteiro simples
+// ------------------------------------------------------------
+void calcularDobro(int *B)
+{
+    printf("\nDobro: %d\n", (*B) * 2);
+}
+
+// ------------------------------------------------------------
+// Função que calcula o triplo usando ponteiro duplo
+// ------------------------------------------------------------
+void calcularTriplo(int **C)
+{
+    printf("Triplo: %d\n", (**C) * 3);
+}
+
+// ------------------------------------------------------------
+// Função que calcula o quadruplo usando ponteiro triplo
+// ------------------------------------------------------------
+void calcularQuadruplo(int ***D)
+{
+    printf("Quadruplo: %d\n", (***D) * 4);
+}
+

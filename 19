@@ -1,0 +1,83 @@
+/*
+19. Escreva uma função que aceita como parâmetro um array de inteiros com N valores,
+    e determina o maior elemento do array e o número de vezes que este elemento ocorreu no array.
+    Por exemplo, para um array com os seguintes elementos:
+    5, 2, 15, 3, 7, 15, 8, 6, 15
+    a função deve retornar para o programa que a chamou o valor 15 e o número 3
+    (indicando que o número 15 ocorreu 3 vezes).
+    A função deve ser do tipo void.
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+// ------------------------------------------------------------
+// Protótipo da função
+// ------------------------------------------------------------
+void maiorElemento(int *ptr_array, int tamanho, int *maior, int *quantidade);
+
+// ------------------------------------------------------------
+// Função principal
+// ------------------------------------------------------------
+int main()
+{
+    int n;
+
+    printf("Quantos numeros deseja inserir? ");
+    scanf("%d", &n);
+
+    if (n <= 0)
+    {
+        printf("Quantidade invalida.\n");
+        return 0;
+    }
+
+    int vetor[n];   // VLA (Array de tamanho variável - C99)
+
+    // Leitura dos valores
+    for (int i = 0; i < n; i++)
+    {
+        printf("Digite o numero %d: ", i + 1);
+        scanf("%d", &vetor[i]);
+    }
+
+    int maior;
+    int quantidade;
+
+    // Chamada da função
+    maiorElemento(vetor, n, &maior, &quantidade);
+
+    printf("\nMaior elemento: %d\n", maior);
+    printf("Numero de ocorrencias: %d\n", quantidade);
+
+    return 0;
+}
+
+// ------------------------------------------------------------
+// Função que encontra o maior elemento e suas ocorrências
+// ------------------------------------------------------------
+void maiorElemento(int *ptr_array, int tamanho, int *maior, int *quantidade)
+{
+    int *ptr_final = ptr_array + tamanho; // significa, peque o endereço inicial do array, avance tamanho posições
+                                          // isso é aritmética de ponteiros
+
+    // Inicializa com o primeiro elemento
+    *maior = *ptr_array;                  // Consideramos inicialmente que o maior número é o primeiro elemento
+    *quantidade = 0;                      // Agora precisamos contar quantas vezes esse maior aparece
+                                          // Para contar corretamente, precisamos começar do zero
+
+    while (ptr_array < ptr_final)
+    {
+        if (*ptr_array > *maior)
+        {
+            *maior = *ptr_array;
+            *quantidade = 1;   // reinicia contagem
+        }
+        else if (*ptr_array == *maior)
+        {
+            (*quantidade)++; // conta as ocorrências
+        }
+
+        ptr_array++;  // avança ponteiro
+    }
+}

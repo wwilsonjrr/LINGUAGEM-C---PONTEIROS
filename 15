@@ -1,0 +1,46 @@
+/*
+15. Crie uma função que receba como parâmetro um array e o imprima.
+    Não utilize índices para percorrer o array, apenas aritmética de ponteiros.
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+// ------------------------------------------------------------
+// Protótipo da função
+// ------------------------------------------------------------
+void imprimirArray(int *ptr_array, int tamanho);
+
+// ------------------------------------------------------------
+// Função principal
+// ------------------------------------------------------------
+int main()
+{
+    int vetor[5] = {10, 20, 30, 40, 50};
+
+    // Chamada da função passando o array
+    imprimirArray(vetor, 5);
+
+    system("pause");
+    return 0;
+}
+
+// ------------------------------------------------------------
+// Função que imprime o array usando apenas ponteiros
+// ------------------------------------------------------------
+void imprimirArray(int *ptr_array, int tamanho)
+{
+    int *ptr_final = ptr_array + tamanho; // O valor do ptr_final é o endereço do ptr_array + 5, pois 5 é o tamanho
+                                          // Significa, pegue o endereço inicial do array, avance 5 posições
+
+    printf("Elementos do array:\n");
+
+    while (ptr_array < ptr_final)        // Enquanto o endereço do ptr_array for menor que o endereço do ptr_final, continue
+    {
+        printf("%d ", *ptr_array);       // Valor armazenado naquele endereço
+        ptr_array++;  // Avança para o próximo elemento
+                      // Avança os endereços do ptr_array um por um até o endereço do ptr_array ser igual ao ptr_final
+    }
+
+    printf("\n");
+}

@@ -1,0 +1,65 @@
+/*
+17. Escreva uma função que, dado um número real passado como parâmetro,
+    retorne a parte inteira e a parte fracionária deste número.
+    Escreva um programa que chama esta função.
+
+    Protótipo da função:
+    void frac(float num, int* inteiro, float* frac);
+
+
+    Conclusão
+
+    O * na declaração faz parte do tipo da variável.
+    O * no uso serve para acessar o conteúdo do endereço.
+
+
+    void frac(float num, int* inteiro, float* fracionaria)
+
+    frac recebe:
+
+    um número real
+
+    o endereço de um inteiro
+
+    o endereço de um float
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+// ------------------------------------------------------------
+// Protótipo da função
+// ------------------------------------------------------------
+void frac(float num, int* inteiro, float* fracionaria);  // int* (tipo ponteiro inteiro) // float* (tipo ponteiro real)
+
+// ------------------------------------------------------------
+// Função principal
+// ------------------------------------------------------------
+int main()
+{
+    float numero;
+    int parteInteira;
+    float parteFracionaria;
+
+    printf("Digite um numero real: ");
+    scanf("%f", &numero);
+
+    // Chama a função passando os ENDEREÇOS
+    frac(numero, &parteInteira, &parteFracionaria);
+
+    printf("\nParte inteira: %d\n", parteInteira);
+    printf("Parte fracionaria: %.2f\n", parteFracionaria);
+
+    system("pause");
+    return 0;
+}
+
+// ------------------------------------------------------------
+// Função que separa parte inteira e fracionária
+// ------------------------------------------------------------
+void frac(float num, int* inteiro, float* fracionaria)
+{
+    *inteiro = (int) num;                 // Converte para inteiro (trunca)
+    *fracionaria = num - *inteiro;        // Subtrai para obter parte decimal
+}
+

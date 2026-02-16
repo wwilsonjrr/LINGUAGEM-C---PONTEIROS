@@ -1,0 +1,84 @@
+/*
+12. Faça um programa que leia três valores inteiros e chame uma função que receba estes 3 valores de entrada
+    e retorne eles ordenados, ou seja:
+    - o menor valor na primeira variável,
+    - o segundo menor na variável do meio,
+    - e o maior valor na última variável.
+
+    A função deve retornar o valor 1 se os três valores forem iguais
+    e 0 se existirem valores diferentes.
+
+    Exibir os valores ordenados na tela.
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+// ------------------------------------------------------------
+// Protótipo da função
+// ------------------------------------------------------------
+int ordenarValores(int *a, int *b, int *c);
+
+// ------------------------------------------------------------
+// Função principal
+// ------------------------------------------------------------
+int main()
+{
+    int x, y, z;
+    int resultado;
+
+    printf("Digite tres valores inteiros:\n");
+    scanf("%d %d %d", &x, &y, &z);
+
+    // Chama a função passando os ENDEREÇOS
+    resultado = ordenarValores(&x, &y, &z);
+
+    printf("\nValores ordenados:\n");
+    printf("%d %d %d\n", x, y, z);
+
+    if (resultado == 1)
+        printf("Os tres valores sao iguais.\n");
+    else
+        printf("Existem valores diferentes.\n");
+
+    system("pause");
+    return 0;
+}
+
+// ------------------------------------------------------------
+// Função que ordena os valores usando ponteiros
+// ------------------------------------------------------------
+int ordenarValores(int *a, int *b, int *c)
+{
+    int temp;
+
+    // Se a > b → troca
+    if (*a > *b)
+    {
+        temp = *a;
+        *a = *b;
+        *b = temp;
+    }
+
+    // Se a > c → troca
+    if (*a > *c)
+    {
+        temp = *a;
+        *a = *c;
+        *c = temp;
+    }
+
+    // Se b > c → troca
+    if (*b > *c)
+    {
+        temp = *b;
+        *b = *c;
+        *c = temp;
+    }
+
+    // Verifica se todos são iguais
+    if (*a == *b && *b == *c)
+        return 1;
+    else
+        return 0;
+}

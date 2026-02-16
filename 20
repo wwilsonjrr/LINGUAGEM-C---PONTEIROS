@@ -1,0 +1,70 @@
+/*
+20. Implemente uma função que receba como parâmetro um array de números reais de tamanho N
+    e retorne quantos números negativos há nesse array.
+    Essa função deve obedecer ao protótipo:
+
+    int negativos(float *vet, int N);
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+// ------------------------------------------------------------
+// Protótipo da função
+// ------------------------------------------------------------
+int negativos(float *vet, int N);
+
+// ------------------------------------------------------------
+// Função principal
+// ------------------------------------------------------------
+int main()
+{
+    int num;
+
+    printf("Quantos numeros devera ter o array? ");
+    scanf("%d", &num);
+
+    if (num <= 0)
+    {
+        printf("Quantidade invalida.\n");
+        return 0;
+    }
+
+    float valores[num];  // Array de tamanho variável
+
+    // Leitura dos valores
+    for (int i = 0; i < num; i++)
+    {
+        printf("Digite o numero %d: ", i + 1);
+        scanf("%f", &valores[i]);
+    }
+
+    // Chamada da função
+    int qtdNegativos = negativos(valores, num);
+
+    printf("\nQuantidade de numeros negativos: %d\n", qtdNegativos);
+
+    return 0;
+}
+
+// ------------------------------------------------------------
+// Função que conta quantos números negativos existem no array
+// ------------------------------------------------------------
+int negativos(float *vet, int N)
+{
+    int contador = 0; // inicializa com 0
+
+    float *ptr_final = vet + N; // significa, pegue o endereço inicial do array, avance tamanho posições
+
+    while (vet < ptr_final) // enquanto o endereço do ponteiro array for menor que o endereço do ptr_final
+    {
+        if (*vet < 0)
+        {
+            contador++;
+        }
+
+        vet++;  // avança ponteiro
+    }
+
+    return contador;
+}

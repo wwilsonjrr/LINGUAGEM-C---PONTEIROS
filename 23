@@ -1,0 +1,121 @@
+/*
+23. Escreva uma função que retorna o maior valor de um array de tamanho N.
+    Escreva um programa que leia N valores inteiros, imprima o array com k elementos por linha,
+    e o maior elemento. O valor de k também deve ser fornecido pelo usuário.
+
+
+    O exercício quer que você:
+
+    1) Leia N números
+
+    2) Mostre eles organizados com k números por linha
+
+    3) Crie uma função que descubra o maior número do vetor
+
+    4) Mostre o maior número
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+// ------------------------------------------------------------
+// Protótipos das funções
+// ------------------------------------------------------------
+void lerArray(int *vet, int N);
+void imprimirArray(int *vet, int N, int k);
+int maiorValor(int *vet, int N);
+
+// ------------------------------------------------------------
+// Função principal
+// ------------------------------------------------------------
+int main()
+{
+    int N, k;
+
+    printf("Digite o tamanho do array (N): ");
+    scanf("%d", &N);
+
+    int vetor[N];  // array de tamanho variável (C99+)
+
+    lerArray(vetor, N);
+
+    printf("Digite quantos elementos por linha (k): ");
+    scanf("%d", &k);
+
+    printf("\nArray formatado:\n");
+    imprimirArray(vetor, N, k);
+
+    int maior = maiorValor(vetor, N);
+
+    printf("\nMaior valor do array: %d\n", maior);
+
+    system("pause");
+    return 0;
+}
+
+// ------------------------------------------------------------
+// Função para ler o array usando ponteiros
+// ------------------------------------------------------------
+void lerArray(int *vet, int N)
+{
+    int *limite = vet + N; // O ponteiro limite guarda esse novo endereço
+                           // Limite aponta para a posição logo após o último elemento do array
+
+    printf("Digite %d valores inteiros:\n", N);
+
+    while (vet < limite)
+    {
+        scanf("%d", vet); // &vet (pega o endereço de vet). vet (já contém um endereço). Nesse caso é vet.
+        vet++; // Avança as posições
+    }
+}
+
+// ------------------------------------------------------------
+// Função para imprimir k elementos por linha
+// ------------------------------------------------------------
+void imprimirArray(int *vet, int N, int k)
+{
+    int contador = 0; // inicializa com zero
+    int *limite = vet + N; // O ponteiro limite guarda esse novo endereço
+                           // Limite aponta para a posição logo após o último elemento do array
+
+    while (vet < limite)
+    {
+        printf("%d ", *vet);
+        contador++;
+
+        if (contador == k) // Se já imprimimos k elementos na linha atual
+        {
+            printf("\n"); // Quando chega em k, quebra a linha
+            contador = 0; // Reseta o contador
+        }
+
+        vet++; // Avança o ponteiro para o próximo elemento do array
+    }
+
+    if (contador != 0) // Ainda existem elementos na linha atual que não completaram k
+        printf("\n"); // No final, garante quebra de linha se necessário
+}
+
+// ------------------------------------------------------------
+// Função que retorna o maior valor do array
+// ------------------------------------------------------------
+int maiorValor(int *vet, int N)
+{
+    int *limite = vet + N; // O ponteiro limite guarda esse novo endereço
+                           // Limite aponta para a posição logo após o último elemento do array
+
+    int maior = *vet;  // assume primeiro como maior
+    vet++; // Avança posição
+
+    while (vet < limite)
+    {
+        if (*vet > maior)
+        {
+            maior = *vet;
+        }
+        vet++; // Avança posição
+    }
+
+    return maior;
+}

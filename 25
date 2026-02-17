@@ -1,0 +1,76 @@
+/*
+25. Faça um programa que possua uma função para:
+    • Ler 2 notas e retorná-las por parâmetro (chamar uma função dedicada a ler 2 notas válidas e que devolva os 2 números lidos);
+    • Calcular a média simples e a média ponderada e retorná-las por parâmetro,
+      onde a segunda nota tem peso 2:
+          média_ponderada = (n1*1 + n2 * 2) / 1 + 2
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+// -----------------------------------------------------------------------------
+// PROTÓTIPOS DAS FUNÇÕES
+// -----------------------------------------------------------------------------
+void lerDuasNotas(float *nota1, float *nota2);
+void calcularMedias(float n1, float n2, float *mediaSimples, float *mediaPonderada);
+
+// -----------------------------------------------------------------------------
+// FUNÇÃO PRINCIPAL
+// -----------------------------------------------------------------------------
+int main()
+{
+    float N1, N2;
+    float mediaS, mediaP;
+
+    // Chamando a função que lê as notas
+    lerDuasNotas(&N1, &N2);
+
+    // Chamando a função que calcula as médias
+    calcularMedias(N1, N2, &mediaS, &mediaP);
+
+    // Exibindo resultados
+    printf("\nResultados:\n");
+    printf("Media Simples: %.2f\n", mediaS);
+    printf("Media Ponderada: %.2f\n", mediaP);
+
+    system("pause");
+    return 0;
+}
+
+// -----------------------------------------------------------------------------
+// FUNÇÃO QUE LÊ DUAS NOTAS VÁLIDAS
+// -----------------------------------------------------------------------------
+void lerDuasNotas(float *nota1, float *nota2)
+{
+    do
+    {
+        printf("Digite a primeira nota (0 a 10): ");
+        scanf("%f", nota1);
+
+        if (*nota1 < 0 || *nota1 > 10)
+            printf("Nota invalida! Tente novamente.\n");
+
+    } while (*nota1 < 0 || *nota1 > 10);
+
+
+    do
+    {
+        printf("Digite a segunda nota (0 a 10): ");
+        scanf("%f", nota2);
+
+        if (*nota2 < 0 || *nota2 > 10)
+            printf("Nota invalida! Tente novamente.\n");
+
+    } while (*nota2 < 0 || *nota2 > 10);
+}
+
+// -----------------------------------------------------------------------------
+// FUNÇÃO QUE CALCULA AS MÉDIAS
+// -----------------------------------------------------------------------------
+void calcularMedias(float n1, float n2, float *mediaSimples, float *mediaPonderada)
+{
+    *mediaSimples = (n1 + n2) / 2;             // Coloca o valor calculado naquele endereço
+
+    *mediaPonderada = (n1*1 + n2 * 2) / 1 + 2; // Coloca o valor calculado naquele endereço
+}

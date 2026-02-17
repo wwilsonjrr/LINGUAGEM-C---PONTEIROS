@@ -1,0 +1,111 @@
+/*
+26. Implemente uma função que calcule as raízes de uma equação do segundo grau do tipo:
+        A*x² + B*x + C = 0
+
+    Lembrando que:
+        X = (-B ± √Δ) / (2A)
+    Onde:
+        Δ = B² - 4*A*C
+
+    A variável A deve ser diferente de zero.
+    - Se Δ < 0 → não existe raiz real.
+    - Se Δ = 0 → existe uma raiz real.
+    - Se Δ > 0 → existem duas raízes reais.
+
+    A função deve seguir o protótipo:
+        int raizes(float A, float B, float C, float *X1, float *X2);
+
+    Ela deve retornar o número de raízes reais distintas:
+    - 0 se não houver raízes reais,
+    - 1 se houver uma raiz real,
+    - 2 se houver duas raízes reais.
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+// -----------------------------------------------------------------------------
+// PROTÓTIPO DA FUNÇÃO
+// -----------------------------------------------------------------------------
+int raizes(float A, float B, float C, float *X1, float *X2);
+
+// -----------------------------------------------------------------------------
+// FUNÇÃO PRINCIPAL
+// -----------------------------------------------------------------------------
+int main()
+{
+    float a, b, c;
+    float x1, x2;
+    int quantidadeRaizes;
+
+    printf("Equacao do segundo grau: A*x^2 + B*x + C = 0\n\n");
+
+    printf("Digite o valor de A: ");
+    scanf("%f", &a);
+
+    printf("Digite o valor de B: ");
+    scanf("%f", &b);
+
+    printf("Digite o valor de C: ");
+    scanf("%f", &c);
+
+    // Verifica se A é válido
+    if (a == 0)
+    {
+        printf("\nNao eh equacao do segundo grau (A deve ser diferente de zero).\n");
+        return 0; // Sai do programa
+    }
+
+    // Chama a função
+    quantidadeRaizes = raizes(a, b, c, &x1, &x2);
+
+    // Mostra resultado
+    if (quantidadeRaizes == 0)
+    {
+        printf("\nNao existem raizes reais.\n");
+    }
+    else if (quantidadeRaizes == 1)
+    {
+        printf("\nExiste uma raiz real:\n");
+        printf("X = %.2f\n", x1);
+    }
+    else
+    {
+        printf("\nExistem duas raizes reais:\n");
+        printf("X1 = %.2f\n", x1);
+        printf("X2 = %.2f\n", x2);
+    }
+
+    system("pause");
+    return 0;
+}
+
+// -----------------------------------------------------------------------------
+// FUNÇÃO QUE CALCULA AS RAÍZES
+// -----------------------------------------------------------------------------
+int raizes(float A, float B, float C, float *X1, float *X2)
+{
+    float delta;
+
+    delta = B * B - 4 * A * C;
+
+    // Caso 1: Delta negativo
+    if (delta < 0)
+    {
+        return 0;
+    }
+
+    // Caso 2: Delta igual a zero
+    if (delta == 0)
+    {
+        *X1 = -B / (2 * A);
+        return 1;
+    }
+
+    // Caso 3: Delta positivo
+    *X1 = (-B + sqrt(delta)) / (2 * A); // Coloca o valor calculado naquele endereço
+    *X2 = (-B - sqrt(delta)) / (2 * A); // Coloca o valor calculado naquele endereço
+
+    return 2;
+}

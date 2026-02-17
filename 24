@@ -1,0 +1,78 @@
+/*
+24. Escreva uma função que receba um array de inteiros V e os endereços de duas variáveis inteiras, min e max,
+    e armazene nessas variáveis o valor mínimo e máximo do array.
+    Escreva também uma função main que use essa função.
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+// ------------------------------------------------------------
+// Protótipo da função
+// ------------------------------------------------------------
+void encontraMinMax(int *V, int N, int *min, int *max);
+
+// ------------------------------------------------------------
+// Função principal
+// ------------------------------------------------------------
+int main()
+{
+    int n;
+
+    printf("Digite o tamanho do array: ");
+    scanf("%d", &n);
+
+    int vetor[n];
+
+    printf("Digite %d valores inteiros:\n", n);
+
+    int *ptr = vetor; // Ele guarda o endereço do primeiro elemento do vetor, ou seja, &vetor[0]
+    int *limite = vetor + n; // Limite aponta para a posição logo após o último elemento do array
+
+    // Leitura usando ponteiros
+    while (ptr < limite)
+    {
+        scanf("%d", ptr); // Lê os endereços de ptr
+        ptr++; // Avança as posições
+    }
+
+    int minimo, maximo;
+
+    // Chamada da função
+    encontraMinMax(vetor, n, &minimo, &maximo);
+
+    printf("\nValor minimo: %d\n", minimo);
+    printf("Valor maximo: %d\n", maximo);
+
+    system("pause");
+    return 0;
+}
+
+// ------------------------------------------------------------
+// Função que encontra mínimo e máximo
+// ------------------------------------------------------------
+void encontraMinMax(int *V, int N, int *min, int *max)
+{
+    int *limite = V + N; // Limite aponta para a posição logo após o último elemento do array
+
+    // Inicializa com o primeiro elemento
+    *min = *V;
+    *max = *V;
+
+    V++;  // Avança para o segundo elemento
+
+    while (V < limite)
+    {
+        if (*V < *min)
+        {
+            *min = *V;
+        }
+
+        if (*V > *max)
+        {
+            *max = *V;
+        }
+
+        V++; // Avança para o segundo elemento
+    }
+}

@@ -4,6 +4,19 @@
     • Calcular a média simples e a média ponderada e retorná-las por parâmetro,
       onde a segunda nota tem peso 2:
           média_ponderada = (n1*1 + n2 * 2) / 1 + 2
+
+
+    Importante:
+
+    void lerDuasNotas(float *nota1, float *nota2)
+
+    *nota1 e *nota2 são ponteiros, pois serão lidos pela função
+
+
+
+    void calcularMedias(float n1, float n2, float *mediaSimples, float *mediaPonderada)
+
+    Aqui só *mediaSimples e *mediaPonderada são ponteiros, pois serão calculados, n1 e n2 não
 */
 
 #include <stdio.h>
